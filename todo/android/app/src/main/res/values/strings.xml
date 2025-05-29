@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">youtube</string>
+    <string name="title_activity_main">youtube</string>
+    <string name="package_name">com.youtubedash.app</string>
+    <string name="custom_url_scheme">com.youtubedash.app</string>
+</resources>
