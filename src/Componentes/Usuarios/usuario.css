@@ -1,14 +1,20 @@
+body {
+  background-color: #f5f5f5;
+  margin: 0;
+  font-family: sans-serif;
+  color: #0f0f0f;
+}
+
 .usuario-container {
-  max-width: 600px;
-  margin: 3rem auto;
+  max-width: 370px;
+  margin: 3rem auto; 
   padding: 2rem;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   text-align: center;
-  font-family: sans-serif;
-  color: #0f0f0f;
 }
+
 
 .usuario-container h2 {
   font-size: 2rem;
@@ -23,6 +29,7 @@
   font-weight: bold;
 }
 
+/* Labels */
 label {
   display: block;
   text-align: left;
@@ -30,19 +37,20 @@ label {
   font-weight: bold;
 }
 
+/* Inputs */
 input[type="text"],
 input[type="email"],
 input[type="date"],
 input[type="tel"] {
-  width: 100%;
+  width: 90%;
   padding: 0.7rem 1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
   margin-bottom: 0.8rem;
-  box-sizing: border-box;
 }
 
+/* Focus inputs */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="date"]:focus,
@@ -51,6 +59,7 @@ input[type="tel"]:focus {
   outline: none;
 }
 
+/* Botones */
 button {
   background-color: #ff0000;
   color: white;
@@ -68,7 +77,7 @@ button:hover {
   background-color: #cc0000;
 }
 
-/* Input y botón de agregar imagen */
+/* Contenedor input + botón agregar imagen */
 .agregar-imagen {
   display: flex;
   gap: 0.5rem;
@@ -115,6 +124,7 @@ button:hover {
   font-size: 0.75rem;
   padding: 0.4rem 0.7rem;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 /* Botón cerrar sesión ancho completo */
@@ -128,8 +138,9 @@ button:hover {
   text-align: center;
   font-size: 1.2rem;
   margin-top: 2rem;
-  color: #0f0f0f;
 }
+
+/* Video card */
 .video-card img {
   width: 100%;
   height: auto;
@@ -146,5 +157,16 @@ button:hover {
 
   .agregar-imagen {
     flex-direction: column;
+  }
+
+  .agregar-imagen input,
+  .agregar-imagen button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .imagenes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
 }

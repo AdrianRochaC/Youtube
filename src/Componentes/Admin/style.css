@@ -1,8 +1,8 @@
 /* Base para todo */
 .admin-container {
-  margin-left: 240px;
+  /* margin-left: 240px; */ /* Eliminado */
   padding: clamp(15px, 2vw, 30px);
-  max-width: calc(100% - 260px);
+  max-width: 100%; /* Modificado */
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -13,6 +13,7 @@
   /* Fuente base escalable */
   font-size: clamp(0.75rem, 1.2vw, 1rem);
 }
+
 
 /* Títulos */
 .admin-container h1 {

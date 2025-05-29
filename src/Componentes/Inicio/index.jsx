@@ -71,76 +71,73 @@ function Inicio() {
   };
 
   return (
-  <div className="inicio-container">
-    <header className="inicio-header">
-      <h1>Mi YouTube</h1>
-      <input
-        type="text"
-        placeholder="Buscar videos en YouTube"
-        value={busqueda}
-        onChange={(e) => setBusqueda(e.target.value)}
-        className="inicio-buscador"
-      />
-      <button type="button" onClick={handleIrUsuarios}>Usuario</button>
-    </header>
+    <div className="inicio-container">
+      <header className="inicio-header">
+        <h1>YouTube</h1><br></br><br></br>
+        <input
+          type="text"
+          placeholder="Buscar videos en YouTube"
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          className="inicio-buscador"
+        />
 
-    <main className="inicio-main">
-      <Filtro tipoSeleccionado={tipoSeleccionado} onTipoChange={handleTipoChange} />
+      </header>
 
-      {/* Canales y videos siguen igual */}
-      {canales.length > 0 && (
-        <section className="inicio-canales">
-          <h2>Canales encontrados</h2>
-          <div className="inicio-canales-lista">
-            {canales.map((canal) => (
-              <div
-                className="inicio-canal-card"
-                key={canal.id.channelId}
-                onClick={() => navigate(`/canal/${canal.id.channelId}`)}
-              >
-                <img
-                  className="inicio-canal-imagen"
-                  src={canal.snippet.thumbnails.medium.url}
-                  alt={canal.snippet.channelTitle}
-                  loading="lazy"
-                />
-                <p>{canal.snippet.channelTitle}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
 
-      <section className='inicio-lista'>
-        {videos && videos.length > 0 ? (
-          videos.map((video) => {
-            const videoId = video.id.videoId || video.id;
-            return (
-              <div
-                className='inicio-lista-video'
-                onClick={() => navigate(`/video/${videoId}`)}
-                key={videoId}
-              >
-                <img
-                  src={video.snippet.thumbnails.medium.url}
-                  alt={video.snippet.title}
-                  loading='lazy'
-                />
-                <p>{video.snippet.title}</p>
-              </div>
-            );
-          })
-        ) : (
-          <p>No hay videos para mostrar</p>
+      <main className="inicio-main main-content">
+        <Filtro tipoSeleccionado={tipoSeleccionado} onTipoChange={handleTipoChange} />
+
+        {/* Canales y videos siguen igual */}
+        {canales.length > 0 && (
+          <section className="inicio-canales">
+            <h2>Canales encontrados</h2>
+            <div className="inicio-canales-lista">
+              {canales.map((canal) => (
+                <div
+                  className="inicio-canal-card"
+                  key={canal.id.channelId}
+                  onClick={() => navigate(`/canal/${canal.id.channelId}`)}
+                >
+                  <img
+                    className="inicio-canal-imagen"
+                    src={canal.snippet.thumbnails.medium.url}
+                    alt={canal.snippet.channelTitle}
+                    loading="lazy"
+                  />
+                  <p>{canal.snippet.channelTitle}</p>
+                </div>
+              ))}
+            </div>
+          </section>
         )}
-      </section>
-    </main>
 
-    <footer>
-      © 2025 Mi YouTube - Todos los derechos reservados
-    </footer>
-  </div>
-);
+        <section className='inicio-lista'>
+          {videos && videos.length > 0 ? (
+            videos.map((video) => {
+              const videoId = video.id.videoId || video.id;
+              return (
+                <div
+                  className='inicio-lista-video'
+                  onClick={() => navigate(`/video/${videoId}`)}
+                  key={videoId}
+                >
+                  <img
+                    src={video.snippet.thumbnails.medium.url}
+                    alt={video.snippet.title}
+                    loading='lazy'
+                  />
+                  <p>{video.snippet.title}</p>
+                </div>
+              );
+            })
+          ) : (
+            <p>No hay videos para mostrar</p>
+          )}
+        </section>
+      </main>
+    </div>
+  );
 }
 
 export default Inicio;

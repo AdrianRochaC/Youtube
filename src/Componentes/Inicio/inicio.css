@@ -1,85 +1,51 @@
-.inicio-container {
-  background-color: #ffffff;
-  color: #000000;
-  min-height: 100vh;
-  padding: 2rem;
-  padding-left: 240px; /* espacio para el menú lateral */
-  box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
-  display: flex;
-  flex-direction: column;
-  transition: padding-left 0.3s ease;
-}
-
-/* Header blanco con barra de búsqueda dentro */
 .inicio-header {
-  background-color: #ffffff;  /* blanco */
-  color: #ff0000;             /* rojo YouTube */
-  padding: 1rem 2rem;
-  border-radius: 8px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  box-shadow: 0 2px 8px rgb(255 0 0 / 0.1);
-  margin-bottom: 0; /* eliminado margen inferior para que el buscador esté pegado */
-  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  min-height: 50px;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  gap: 12px;
 }
 
-/* Título se oculta o se puede ajustar tamaño */
 .inicio-header h1 {
-  font-size: 1.8rem;
+  font-size: 1rem;
   color: #ff0000;
   margin: 0;
-  flex-shrink: 0;
-}
-
-/* Botón estilo rojo con fondo blanco */
-.inicio-header button {
-  background-color: #ffffff;
-  color: #ff0000;
-  border: 2px solid #ff0000;
-  padding: 0.6em 1.2em;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  flex-shrink: 0;
 }
 
-.inicio-header button:hover {
-  background-color: #ffcccc;
-  color: #990000;
-  border-color: #990000;
-}
-
-/* Barra de búsqueda dentro del header */
 .inicio-buscador {
-  flex-grow: 1;
-  max-width: 600px;
-  padding: 0.8em 1em;
-  font-size: 1em;
-  border-radius: 20px;
-  border: 2px solid #ccc;
-  background-color: #f9f9f9;
-  color: #000;
-  display: block;
-  outline: none;
-  transition: border-color 0.3s ease;
+  width: 100%;
+  max-width: 240px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  text-align: left;
 }
 
-.inicio-buscador:focus {
-  border-color: #ff0000;
+@media (max-width: 480px) {
+  .inicio-buscador {
+    max-width: 180px;
+    padding: 5px 8px;
+  }
 }
 
-.inicio-buscador::placeholder {
-  color: #666;
-}
-
-/* Sección principal con margen superior para separar de header */
-main {
-  margin-top: 2rem;
+.inicio-main {
+  padding-top: 60px; /* espacio para el header */
+  padding-bottom: 60px; /* espacio para el menú inferior */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 /* Lista de videos */
@@ -87,168 +53,64 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 12px;
+  width: 100%;
+  max-width: 600px;
 }
 
 .inicio-lista-video {
-  background-color: #f2f2f2;
-  border-radius: 10px;
-  overflow: hidden;
-  width: 300px;
+  flex: 1 1 280px;
+  max-width: 280px;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.inicio-lista-video:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
 }
 
 .inicio-lista-video img {
   width: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.inicio-lista-video p {
-  margin: 0;
-  padding: 0.8rem;
-  color: #000;
-  font-size: 1rem;
-  text-align: left;
-}
-
-/* Estilos para canales/perfiles */
-.inicio-canal {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid #ff0000;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.inicio-canal:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-}
-
-.inicio-canal-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-footer {
-  background-color: #ff0000;
-  color: white;
-  text-align: center;
-  font-size: 0.9rem;
-  margin-top: 4rem;
-  padding: 1rem;
   border-radius: 8px;
 }
 
-.inicio-canales {
-  margin-top: 2rem;
+.inicio-lista-video p {
+  font-size: 0.85rem;
+  margin: 4px 0 0;
+  text-align: center;
 }
 
-.inicio-canales h2 {
+/* Canales centrados */
+.inicio-canales {
+  width: 100%;
+  max-width: 600px;
+  margin: 16px 0;
   text-align: center;
-  color: #ff0000;
-  margin-bottom: 1rem;
 }
 
 .inicio-canales-lista {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
-  margin-top: 1rem;
+  gap: 12px;
 }
 
 .inicio-canal-card {
+  width: 48%;
+  max-width: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 140px;
-  padding: 1rem;
-  background-color: #fefefe;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: transform 0.3s ease;
 }
 
-.inicio-canal-card:hover {
-  transform: scale(1.05);
-}
-
-.inicio-canal-imagen {
-  width: 90px;
-  height: 90px;
+.inicio-canal-card img {
+  width: 100%;
   border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 0.5rem;
 }
 
-/* Responsive */
-
-@media (max-width: 1024px) {
-  .inicio-container {
-    padding-left: 150px;
-  }
-}
-
-@media (max-width: 768px) {
-  .inicio-container {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .inicio-header {
-    padding: 1rem;
-  }
-
-  .inicio-header h1 {
-    font-size: 1.5rem;
-    flex-basis: 100%;
-  }
-
-  .inicio-buscador {
-    max-width: 100%;
-    margin-top: 0.5rem;
-  }
-
-  .inicio-lista-video {
-    width: 100%;
-  }
+.inicio-canal-card p {
+  font-size: 0.85rem;
+  margin-top: 4px;
 }
 
 @media (max-width: 480px) {
-  .inicio-header button {
-    width: 100%;
-    padding: 0.8em;
-    font-size: 0.9rem;
-  }
-
-  .inicio-lista {
-    gap: 1rem;
-  }
-
   .inicio-canal-card {
-    width: 110px;
-    padding: 0.8rem;
-  }
-
-  .inicio-canal-imagen {
-    width: 70px;
-    height: 70px;
+    width: 100%;
+    max-width: none;
   }
 }
