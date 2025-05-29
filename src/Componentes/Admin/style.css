@@ -1,141 +1,261 @@
+/* Base para todo */
 .admin-container {
-  max-width: 1200px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left: 240px;
+  padding: clamp(15px, 2vw, 30px);
+  max-width: calc(100% - 260px);
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  overflow-x: auto; /* Para que la tabla no se desborde */
+  overflow-x: auto;
+  font-family: 'Segoe UI', sans-serif;
+
+  /* Fuente base escalable */
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
 }
 
+/* Títulos */
 .admin-container h1 {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 2rem;
-  color: #333;
+  margin-bottom: clamp(20px, 4vw, 40px);
+  font-size: clamp(1.3rem, 4vw, 2.2rem);
+  color: #222;
 }
 
-.admin-container table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px; /* Evitar que la tabla se achique demasiado */
+.admin-container h2 {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  margin-bottom: clamp(10px, 1.5vw, 15px);
+  color: #444;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
 }
 
-.admin-container th,
-.admin-container td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-  word-wrap: break-word;
-}
-
-.admin-container th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
-
+/* Inputs y select */
 .admin-container input[type="text"],
-.admin-container input[type="tel"] {
-  width: 90%;
-  padding: 5px;
+.admin-container input[type="tel"],
+.admin-container input[type="email"],
+.admin-container input[type="password"],
+.admin-container input[type="date"],
+.admin-container select {
+  width: 100%;
+  max-width: clamp(180px, 20vw, 300px);
+  margin: clamp(4px, 0.6vw, 6px) clamp(6px, 1vw, 10px) clamp(10px, 1.5vw, 15px) 0;
+  padding: clamp(5px, 1vw, 8px) clamp(6px, 1vw, 10px);
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: clamp(0.7rem, 1vw, 0.95rem);
   box-sizing: border-box;
+  background-color: #fff;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='10'%3E%3Cpath fill='%23333' d='M1 1l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  cursor: pointer;
 }
 
+.admin-container select:focus,
+.admin-container input:focus {
+  border-color: #888;
+  outline: none;
+}
+
+/* Botones */
 .admin-container button {
-  padding: 6px 12px;
+  padding: clamp(5px, 1vw, 8px) clamp(10px, 2vw, 14px);
   background-color: #da0303;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  white-space: nowrap;
+  font-size: clamp(0.7rem, 1vw, 0.95rem);
+  margin-top: clamp(3px, 0.6vw, 5px);
+  margin-bottom: clamp(5px, 1vw, 10px);
+  transition: background-color 0.3s ease;
 }
 
 .admin-container button:hover {
   background-color: #5e0202;
 }
 
+/* Tabla */
+.admin-container table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+  margin-top: clamp(15px, 3vw, 30px);
+  font-size: clamp(0.75rem, 1vw, 1rem);
+}
+
+.admin-container th,
+.admin-container td {
+  border: 1px solid #ddd;
+  padding: clamp(6px, 1vw, 12px) clamp(5px, 1vw, 10px);
+  text-align: center;
+  vertical-align: middle;
+  word-break: break-word;
+}
+
+.admin-container th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+  color: #444;
+}
+
+/* Foto */
 .foto-container {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: clamp(5px, 1vw, 8px);
   text-align: center;
 }
 
 .foto-container img {
-  width: 100px;
+  width: clamp(70px, 8vw, 100px);
   height: auto;
-  border-radius: 5px;
-  margin-bottom: 5px;
+  border-radius: 6px;
+  margin-bottom: clamp(3px, 0.7vw, 5px);
 }
 
-/* Responsive */
+/* ------------ Responsive ------------ */
 
-@media (max-width: 768px) {
+/* Medianas - tablets y pantallas medias */
+@media (max-width: 1024px) {
   .admin-container {
-    margin: 20px 10px;
-    padding: 15px;
+    margin-left: 200px;
+    max-width: calc(100% - 220px);
+    padding: clamp(12px, 1.5vw, 20px);
+    font-size: clamp(0.7rem, 1vw, 0.9rem);
   }
 
   .admin-container h1 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    font-size: clamp(1.1rem, 3vw, 1.9rem);
+    margin-bottom: clamp(15px, 3vw, 30px);
+  }
+
+  .admin-container h2 {
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
   }
 
   .admin-container table {
+    font-size: clamp(0.7rem, 0.9vw, 0.9rem);
     min-width: 100%;
-    font-size: 0.9rem;
-  }
-
-  .admin-container th,
-  .admin-container td {
-    padding: 8px 6px;
   }
 
   .admin-container input[type="text"],
-  .admin-container input[type="tel"] {
-    width: 100%;
-    padding: 6px;
+  .admin-container input[type="tel"],
+  .admin-container input[type="email"],
+  .admin-container input[type="password"],
+  .admin-container input[type="date"],
+  .admin-container select {
+    max-width: clamp(140px, 15vw, 250px);
+    padding: clamp(5px, 1vw, 7px) clamp(6px, 1vw, 9px);
+    font-size: clamp(0.65rem, 0.9vw, 0.9rem);
+    margin: clamp(4px, 0.7vw, 5px) clamp(5px, 0.8vw, 8px) clamp(8px, 1.3vw, 12px) 0;
   }
 
   .admin-container button {
-    padding: 8px 10px;
-    font-size: 0.9rem;
+    padding: clamp(5px, 1vw, 7px) clamp(8px, 1.5vw, 12px);
+    font-size: clamp(0.65rem, 0.9vw, 0.9rem);
+    margin-top: clamp(3px, 0.6vw, 4px);
+    margin-bottom: clamp(4px, 0.9vw, 8px);
   }
 
   .foto-container img {
-    width: 80px;
+    width: clamp(60px, 7vw, 90px);
   }
 }
 
-@media (max-width: 480px) {
+/* Pequeñas - móviles grandes */
+@media (max-width: 768px) {
   .admin-container {
-    margin: 15px 5px;
-    padding: 10px;
+    margin-left: 0;
+    max-width: 100%;
+    padding: clamp(10px, 2vw, 15px);
+    font-size: clamp(0.65rem, 1vw, 0.85rem);
   }
 
   .admin-container h1 {
-    font-size: 1.3rem;
-    margin-bottom: 15px;
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    margin-bottom: clamp(10px, 2.5vw, 25px);
+  }
+
+  .admin-container h2 {
+    font-size: clamp(0.85rem, 1.8vw, 1.1rem);
   }
 
   .admin-container table {
-    font-size: 0.8rem;
+    font-size: clamp(0.65rem, 0.9vw, 0.85rem);
+  }
+
+  .admin-container input[type="text"],
+  .admin-container input[type="tel"],
+  .admin-container input[type="email"],
+  .admin-container input[type="password"],
+  .admin-container input[type="date"],
+  .admin-container select {
+    max-width: 100%;
+    padding: clamp(4px, 1vw, 6px) clamp(5px, 1vw, 8px);
+    font-size: clamp(0.6rem, 0.9vw, 0.85rem);
+    margin: clamp(3px, 0.7vw, 4px) clamp(4px, 0.8vw, 6px) clamp(8px, 1.3vw, 10px) 0;
+  }
+
+  .admin-container button {
+    padding: clamp(4px, 1vw, 6px) clamp(6px, 1.5vw, 10px);
+    font-size: clamp(0.6rem, 0.9vw, 0.85rem);
+    margin-top: clamp(2px, 0.5vw, 3px);
+    margin-bottom: clamp(5px, 1vw, 7px);
+  }
+
+  .foto-container img {
+    width: clamp(55px, 6vw, 80px);
+  }
+}
+
+/* Muy pequeñas - móviles pequeños */
+@media (max-width: 480px) {
+  .admin-container {
+    padding: clamp(8px, 1.5vw, 12px);
+    font-size: clamp(0.6rem, 1vw, 0.8rem);
+  }
+
+  .admin-container h1 {
+    font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+    margin-bottom: clamp(8px, 2vw, 20px);
+  }
+
+  .admin-container h2 {
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
+  }
+
+  .admin-container table {
+    font-size: clamp(0.55rem, 0.8vw, 0.75rem);
   }
 
   .admin-container th,
   .admin-container td {
-    padding: 6px 4px;
+    padding: clamp(4px, 1vw, 8px) clamp(3px, 1vw, 5px);
+  }
+
+  .admin-container input[type="text"],
+  .admin-container input[type="tel"],
+  .admin-container input[type="email"],
+  .admin-container input[type="password"],
+  .admin-container input[type="date"],
+  .admin-container select {
+    max-width: 100%;
+    padding: clamp(3px, 1vw, 5px) clamp(3px, 1vw, 6px);
+    font-size: clamp(0.5rem, 0.8vw, 0.75rem);
+    margin: clamp(2px, 0.7vw, 3px) clamp(2px, 0.8vw, 4px) clamp(6px, 1.2vw, 8px) 0;
   }
 
   .admin-container button {
-    padding: 6px 8px;
-    font-size: 0.85rem;
+    padding: clamp(3px, 0.9vw, 5px) clamp(3px, 1vw, 8px);
+    font-size: clamp(0.5rem, 0.8vw, 0.75rem);
+    margin-top: clamp(1px, 0.5vw, 2px);
+    margin-bottom: clamp(4px, 0.8vw, 6px);
   }
 
   .foto-container img {
-    width: 70px;
+    width: clamp(45px, 5vw, 70px);
   }
 }

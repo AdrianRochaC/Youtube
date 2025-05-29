@@ -1,17 +1,29 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabase";
 import { useNavigate } from "react-router-dom";
+import "./style.css";
 
 function Admin() {
   const [usuarios, setUsuarios] = useState([]);
   const [fotos, setFotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [accesoPermitido, setAccesoPermitido] = useState(false);
+  const [nuevoUsuario, setNuevoUsuario] = useState({
+    nombre: "",
+    correo: "",
+    password: "",
+    fechaNacimiento: "",
+    telefono: "",
+    rol: "usuario",
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
     const verificarAcceso = async () => {
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      const {
+        data: { user },
+        error: userError,
+      } = await supabase.auth.getUser();
 
       if (userError || !user) {
         navigate("/");
@@ -69,7 +81,51 @@ function Admin() {
     obtenerDatos();
   }, [accesoPermitido]);
 
-  const editarUsuario = async (id, nuevoNombre, nuevoCorreo, nuevoTelefono) => {
+  const crearUsuario = async () => {
+    try {
+      const { data, error: authError } = await supabase.auth.signUp({
+        email: nuevoUsuario.correo,
+        password: nuevoUsuario.password,
+      });
+
+      if (authError) {
+        console.error("Error al crear cuenta:", authError.message);
+        return;
+      }
+
+      const uid = data.user.id;
+
+      const { error: insertError } = await supabase.from("usuario").insert([
+        {
+          id: uid,
+          nombre: nuevoUsuario.nombre,
+          correo: nuevoUsuario.correo,
+          telefono: nuevoUsuario.telefono,
+          fecha_nacimiento: nuevoUsuario.fechaNacimiento,
+          rol: nuevoUsuario.rol,
+        },
+      ]);
+
+      if (insertError) {
+        console.error("Usuario creado pero error en tabla usuario:", insertError.message);
+      } else {
+        const nuevo = { ...nuevoUsuario, id: uid, fotos: [] };
+        setUsuarios((prev) => [...prev, nuevo]);
+        setNuevoUsuario({
+          nombre: "",
+          correo: "",
+          password: "",
+          fechaNacimiento: "",
+          telefono: "",
+          rol: "usuario",
+        });
+      }
+    } catch (error) {
+      console.error("Error al crear usuario:", error);
+    }
+  };
+
+  const editarUsuario = async (id, nuevoNombre, nuevoCorreo, nuevoTelefono, nuevoRol) => {
     try {
       const { error } = await supabase
         .from("usuario")
@@ -77,6 +133,7 @@ function Admin() {
           nombre: nuevoNombre,
           correo: nuevoCorreo,
           telefono: nuevoTelefono,
+          rol: nuevoRol,
         })
         .eq("id", id);
 
@@ -86,12 +143,7 @@ function Admin() {
         setUsuarios((prev) =>
           prev.map((usuario) =>
             usuario.id === id
-              ? {
-                  ...usuario,
-                  nombre: nuevoNombre,
-                  correo: nuevoCorreo,
-                  telefono: nuevoTelefono,
-                }
+              ? { ...usuario, nombre: nuevoNombre, correo: nuevoCorreo, telefono: nuevoTelefono, rol: nuevoRol }
               : usuario
           )
         );
@@ -103,10 +155,7 @@ function Admin() {
 
   const eliminarImagen = async (imagenId) => {
     try {
-      const { error } = await supabase
-        .from("multimedia")
-        .delete()
-        .eq("id", imagenId);
+      const { error } = await supabase.from("multimedia").delete().eq("id", imagenId);
 
       if (error) {
         console.error("Error al eliminar la imagen:", error);
@@ -125,6 +174,16 @@ function Admin() {
     }
   };
 
+  const eliminarUsuario = async (id) => {
+    try {
+      await supabase.from("multimedia").delete().eq("usuarioid", id);
+      await supabase.from("usuario").delete().eq("id", id);
+      setUsuarios((prev) => prev.filter((usuario) => usuario.id !== id));
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error);
+    }
+  };
+
   const handleChange = (e, usuarioId, campo) => {
     const newValue = e.target.value;
     setUsuarios((prev) =>
@@ -140,6 +199,47 @@ function Admin() {
   return (
     <div className="admin-container">
       <h1>Administrador - Gestión de Usuarios y Multimedia</h1>
+
+      <h2>Crear Nuevo Usuario</h2>
+      <input
+        type="text"
+        placeholder="Nombre"
+        value={nuevoUsuario.nombre}
+        onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, nombre: e.target.value })}
+      />
+      <input
+        type="email"
+        placeholder="Correo"
+        value={nuevoUsuario.correo}
+        onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, correo: e.target.value })}
+      />
+      <input
+        type="password"
+        placeholder="Contraseña"
+        value={nuevoUsuario.password}
+        onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, password: e.target.value })}
+      />
+      <input
+        type="date"
+        placeholder="Fecha de nacimiento"
+        value={nuevoUsuario.fechaNacimiento}
+        onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, fechaNacimiento: e.target.value })}
+      />
+      <input
+        type="tel"
+        placeholder="Teléfono"
+        value={nuevoUsuario.telefono}
+        onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, telefono: e.target.value })}
+      />
+      <select
+        value={nuevoUsuario.rol}
+        onChange={(e) => setNuevoUsuario({ ...nuevoUsuario, rol: e.target.value })}
+      >
+        <option value="usuario">Usuario</option>
+        <option value="admin">Administrador</option>
+      </select>
+      <button onClick={crearUsuario}>Crear Usuario</button>
+
       <table>
         <thead>
           <tr>
@@ -147,6 +247,7 @@ function Admin() {
             <th>Nombre</th>
             <th>Correo</th>
             <th>Teléfono</th>
+            <th>Rol</th>
             <th>Fotos</th>
             <th>Acciones</th>
           </tr>
@@ -171,6 +272,15 @@ function Admin() {
                 />
               </td>
               <td>
+                <select
+                  value={usuario.rol}
+                  onChange={(e) => handleChange(e, usuario.id, "rol")}
+                >
+                  <option value="usuario">Usuario</option>
+                  <option value="admin">Administrador</option>
+                </select>
+              </td>
+              <td>
                 {usuario.fotos.map((foto) => (
                   <div key={foto.id} style={{ display: "inline-block", marginRight: "10px" }}>
                     <img
@@ -185,10 +295,22 @@ function Admin() {
               <td>
                 <button
                   onClick={() =>
-                    editarUsuario(usuario.id, usuario.nombre, usuario.correo, usuario.telefono)
+                    editarUsuario(
+                      usuario.id,
+                      usuario.nombre,
+                      usuario.correo,
+                      usuario.telefono,
+                      usuario.rol
+                    )
                   }
                 >
                   Guardar Cambios
+                </button>
+                <button
+                  onClick={() => eliminarUsuario(usuario.id)}
+                  style={{ marginLeft: "10px", color: "red", background: "white"}}
+                >
+                  Eliminar Usuario
                 </button>
               </td>
             </tr>
