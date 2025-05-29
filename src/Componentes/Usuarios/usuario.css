@@ -1,0 +1,150 @@
+.usuario-container {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  text-align: center;
+  font-family: sans-serif;
+  color: #0f0f0f;
+}
+
+.usuario-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.usuario-container h3 {
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin: 1rem 0 0.3rem;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="tel"] {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus {
+  border-color: #065fd4;
+  outline: none;
+}
+
+button {
+  background-color: #ff0000;
+  color: white;
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0.5rem 0;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #cc0000;
+}
+
+/* Input y botón de agregar imagen */
+.agregar-imagen {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.agregar-imagen input {
+  flex: 1;
+}
+
+/* Galería de imágenes */
+.imagenes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.imagen-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.imagen-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* Botón eliminar dentro del card */
+.imagen-card button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(255, 0, 0, 0.85);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 4px;
+}
+
+/* Botón cerrar sesión ancho completo */
+.cerrar-sesion {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+/* Mensajes */
+.loading, .error {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  color: #0f0f0f;
+}
+.video-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background: #eee;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 600px) {
+  .usuario-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .agregar-imagen {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,108 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}
+
+.login-card {
+  background-color: #ffffff;
+  padding: 3rem 4rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(235, 1, 1, 0.466);
+  text-align: center;
+  width: 380px;
+  height: 450px;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #202020;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.login-input {
+  padding: 0.9rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.login-input:focus {
+  border-color: #da0303;
+}
+
+.login-button, .register-button {
+  background-color: #da0303;
+  color: white;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover, .register-button:hover {
+  background-color: #da0303;
+}
+
+.login-text {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #606060;
+}
+@media (max-width: 768px) {
+  .login-card {
+    padding: 2.5rem 3rem;
+    max-width: 90%;
+  }
+
+  .login-title {
+    font-size: 1.7rem;
+  }
+
+  .login-button, .register-button {
+    font-size: 0.95rem;
+  }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 2rem;
+    max-width: 95%;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+
+  .login-input {
+    font-size: 0.95rem;
+  }
+
+  .login-button, .register-button {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+}
